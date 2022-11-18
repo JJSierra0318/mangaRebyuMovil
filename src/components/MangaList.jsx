@@ -7,10 +7,10 @@ import MangaItem from "./MangaItem"
 const MangaList = () => {
 
     const [mangas, setMangas] = useState([])
-    const q = ""
+    const q = "attack on titan"
 
     const getMangas = async (q) => {
-        const {data} = await axios.get(`https://api.consumet.org/manga/mangadex/${q}?page=1`)
+        const {data} = await axios.get(`https://api.consumet.org/manga/mangakakalot/${q}?page=1`)
         setMangas(data.results.filter(manga => !manga.title.includes('Doujinshi')))
     }
 
