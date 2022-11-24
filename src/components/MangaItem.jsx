@@ -7,7 +7,7 @@ const mangaStyles = StyleSheet.create({
         width: 325,
         padding: 15,
         alignContent: 'center',
-        backgroundColor: '#EFF7F6',
+        backgroundColor: '#240046',
         borderRadius: 10,
         margin: 10,
         flexDirection: 'row'
@@ -19,7 +19,8 @@ const mangaStyles = StyleSheet.create({
     },
     title: {
         fontSize: 17,
-        padding: 15
+        padding: 15,
+        color: '#FFFFFF'
     }
 })
 
@@ -31,9 +32,9 @@ const MangaItem = ({ manga }) => {
         <View style={mangaStyles.container}>
             <Image
                 style={mangaStyles.image}
-                source={{uri: manga.image}}
+                source={{uri: manga.attributes.posterImage.original}}
             />
-            <Text style={mangaStyles.title}>{manga.title}</Text>
+            <Text style={mangaStyles.title}>{manga.attributes.titles.en_jp ? manga.attributes.titles.en_jp : manga.attributes.titles.en}</Text>
         </View>
     )
 
