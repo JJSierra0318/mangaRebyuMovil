@@ -5,7 +5,6 @@ import { Link } from "react-router-native"
 const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight + 5,
-        backgroundColor: "#1F1F23",
         height: 75,
         flexDirection: 'row',
         padding: 15

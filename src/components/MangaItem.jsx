@@ -7,7 +7,8 @@ const mangaStyles = StyleSheet.create({
         width: 325,
         padding: 15,
         alignContent: 'center',
-        backgroundColor: '#240046',
+        backgroundColor: "#1C1C1C",
+        //backgroundColor: '#240046',
         borderRadius: 10,
         margin: 10,
         flexDirection: 'row'
@@ -26,7 +27,7 @@ const mangaStyles = StyleSheet.create({
 
 const MangaItem = ({ manga }) => {
 
-    console.log(manga);
+    //console.log(manga);
 
     return (
         <View style={mangaStyles.container}>
@@ -34,7 +35,7 @@ const MangaItem = ({ manga }) => {
                 style={mangaStyles.image}
                 source={{uri: manga.attributes.posterImage.original}}
             />
-            <Text style={mangaStyles.title}>{manga.attributes.titles.en_jp ? manga.attributes.titles.en_jp : manga.attributes.titles.en}</Text>
+            <Text style={mangaStyles.title}>{manga.attributes.canonicalTitle}</Text>
         </View>
     )
 

@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
       flex: 1,
       flexGrow: 1,
       flexShrink: 1,
-      backgroundColor: '#3c096c'
+      backgroundColor: "#0E0E0E"
+      //backgroundColor: '#3c096c'
     },
   });
 
