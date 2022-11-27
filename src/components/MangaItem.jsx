@@ -27,7 +27,7 @@ const mangaStyles = StyleSheet.create({
 
 const MangaItem = ({ manga }) => {
 
-    //console.log(manga);
+    //console.log(manga.attributes.ageRatingGuide);
 
     return (
         <View style={mangaStyles.container}>

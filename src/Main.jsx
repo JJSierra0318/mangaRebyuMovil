@@ -1,6 +1,7 @@
 import { View, StyleSheet } from "react-native"
 import { Route, Routes } from "react-router-native"
 import AppBar from "./components/AppBar";
+import LogIn from "./components/LogIn";
 import MangaList from './components/MangaList'
 import SingleManga from "./components/SingleManga";
 
@@ -22,6 +23,7 @@ const Main = () => {
             <Routes>
                 <Route path="/" element={ <MangaList /> }/>
                 <Route path="/manga/:id" element={ <SingleManga /> }/>
+                <Route path="/login" element={ <LogIn /> }/>
             </Routes>
         </View>
     )

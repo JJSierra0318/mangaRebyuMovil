@@ -39,7 +39,7 @@ const MangaList = () => {
     const [filterBy, setFilterBy] = useState("")
     const [page, setPage] = useState(10)
 
-    const fetchMore = async (q, offset) => {
+    /*const fetchMore = async (q, offset) => {
         const url = filterBy ? `https://kitsu.io/api/edge/manga?filter[text]=${q}?page[limit]=10&page[offset]=${offset}` : `https://kitsu.io/api/edge/manga?page[limit]=10&page[offset]=${offset}`
         const {data} = await axios({
             method: 'GET',
@@ -52,10 +52,10 @@ const MangaList = () => {
 
         setMangas([...mangas, ...data.data])
         setPage(page + 10)
-    }
+    }*/
 
     const getMangas = async (q) => {
-        const url = filterBy ? `https://kitsu.io/api/edge/manga?filter[text]=${q}?page[limit]=10&page[offset]=0` : `https://kitsu.io/api/edge/manga?page[limit]=10&page[offset]=0`
+        const url = filterBy ? `https://kitsu.io/api/edge/manga?filter[text]=${q}` : `https://kitsu.io/api/edge/manga`
         const {data} = await axios({
             method: 'GET',
             url,
@@ -73,12 +73,12 @@ const MangaList = () => {
     }, [filterBy])
 
     if (!mangas[0]) return null
-    console.log(filterBy);
 
     return (
         <FlatList
             data={mangas}
             ListHeaderComponent={<MangaListHeader filterBy={filterBy} setFilterBy={setFilterBy}/>}
+            stickyHeaderIndices={[0]}
             onEndReached={({ distanceFromEnd }) => distanceFromEnd < 0 ? null : null}//fetchMore(filterBy, page)}
             onEndReachedThreshold={0.5}
             renderItem={({ item }) => (
