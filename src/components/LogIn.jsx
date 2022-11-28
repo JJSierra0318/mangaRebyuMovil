@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import * as Device from "expo-device"
 import { TextInput, View, StyleSheet, Text, Pressable, Alert } from "react-native"
 import * as yup from "yup"
 import { Formik } from "formik"
+import { UserContext } from "../Main"
 
 const formStyle = StyleSheet.create({
     input: {
@@ -47,7 +48,7 @@ const initialValues = {
 
 const LogIn = () => {
 
-    const [user, setUser] = useState("")
+    const [user, setUser] = useContext(UserContext)
 
     const logIn = async (userName, password) => {
 
@@ -65,7 +66,9 @@ const LogIn = () => {
 
     const onSubmit = async ({  username, password }) => {
         const a = await logIn(username, password)
-        if (a === true) console.log("Successfull")
+        if (a === true) {
+            setUser(username)
+        }
         else onInvalidData("Incorrect username or password")
     }
 

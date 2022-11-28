@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { View, Text, FlatList, Pressable, TextInput, StyleSheet } from "react-native"
 import { useNavigate } from "react-router-native"
 import axios from "axios"
 import MangaItem from "./MangaItem"
+import { UserContext } from "../Main"
 
 const headerStyle = StyleSheet.create({
     input: {
@@ -34,6 +35,8 @@ const MangaListHeader = ({ filterBy, setFilterBy }) => {
 const MangaList = () => {
 
     const navigate = useNavigate()
+    const [user] = useContext(UserContext)
+    console.log(user)
 
     const [mangas, setMangas] = useState([])
     const [filterBy, setFilterBy] = useState("")
