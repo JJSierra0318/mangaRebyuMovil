@@ -5,6 +5,8 @@ import AppBar from "./components/AppBar";
 import LogIn from "./components/LogIn";
 import MangaList from './components/MangaList'
 import SingleManga from "./components/SingleManga";
+import SignUp from "./components/SignUp"
+import UserContext from "./contexts/userStorageContext";
 
 const styles = StyleSheet.create({
     container: {
@@ -15,8 +17,6 @@ const styles = StyleSheet.create({
         //backgroundColor: '#3c096c'
     },
 });
-
-export const UserContext = createContext()
 
 const Main = () => {
 
@@ -30,6 +30,7 @@ const Main = () => {
                     <Route path="/" element={<MangaList />} />
                     <Route path="/manga/:id" element={<SingleManga />} />
                     <Route path="/login" element={<LogIn />} />
+                    <Route path="/signup" element={<SignUp /> } />
                 </Routes>
             </UserContext.Provider>
         </View>

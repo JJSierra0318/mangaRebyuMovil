@@ -1,11 +1,11 @@
-import { useContext } from "react"
-import axios from "axios"
-import * as Device from "expo-device"
 import { TextInput, View, StyleSheet, Text, Pressable, Alert } from "react-native"
 import * as yup from "yup"
 import { Formik } from "formik"
 import UserContext from "../contexts/userStorageContext"
 import { useNavigate } from "react-router-native"
+import { useContext } from "react"
+import axios from "axios"
+import * as Device from "expo-device"
 
 const formStyle = StyleSheet.create({
     input: {
@@ -39,40 +39,44 @@ const validationSchema = yup.object().shape({
     username: yup.string()
         .required("Username is required"),
     password: yup.string()
-        .required("Password is required")
+        .required("Password is required"),
+    confirmPassword: yup.string()
+        .required("Confirm Password is required")
 })
 
 const initialValues = {
     username: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
 }
 
-const LogIn = () => {
+const SignUp = () => {
 
     const [user, setUser] = useContext(UserContext)
     const navigate = useNavigate()
 
-    const logIn = async (userName, password) => {
+    const signUp = async (userName, password) => {
 
-        const { data } = await axios({
-            method: "get",
-            //Si se conecta un dispositivo móvil se conecta por medio de un tunel con ngrok (ngrok 5142)
-            url: Device.osName == "Windows" ? "http://localhost:5142/api/consultarIngreso" : "https://cb2b-2800-e2-8880-1c2f-4986-788b-ee72-cec5.ngrok.io/api/consultarIngreso",
-            params: {
-                userName,
-                password
-            }
-        })
+        const url = Device.osName == "Windows" ? "http://localhost:5142/api/crearRegistro" : "https://cb2b-2800-e2-8880-1c2f-4986-788b-ee72-cec5.ngrok.io/api/crearRegistro"
+         const body = {
+            userName,
+            password
+        }
+
+        const { data } = await axios.post(url, body)
         return data.result
     }
 
-    const onSubmit = async ({ username, password }) => {
-        const a = await logIn(username, password)
-        if (a === true) {
-            setUser(username)
-            navigate(`/`, { replace: true })
+    const onSubmit = async ({ username, password, confirmPassword }) => {
+        if (password === confirmPassword) {
+            const a = await signUp(username, password)
+            if (a === true) {
+                setUser(username)
+                navigate(`/`, { replace: true })
+            }
+            else onInvalidData("Incorrect username or password")
         }
-        else onInvalidData("Incorrect username or password")
+        else onInvalidData("Passwords do not match")
     }
 
     const onInvalidData = (message) =>
@@ -108,6 +112,15 @@ const LogIn = () => {
                         value={values.password}
                         onBlur={handleBlur('password')}
                     />
+                    <Text style={formStyle.placeholder}>Confirm Password</Text>
+                    <TextInput
+                        onChangeText={handleChange('confirmPassword')}
+                        style={formStyle.input}
+                        name="confirmPassword"
+                        secureTextEntry={true}
+                        value={values.confirmPassword}
+                        onBlur={handleBlur('confirmPassword')}
+                    />
                     <Pressable style={formStyle.button} onPress={isValid ? handleSubmit : () => onInvalidData("Both username and password are required")} title="log in">
                         <Text>Log in</Text>
                     </Pressable>
@@ -117,4 +130,4 @@ const LogIn = () => {
     )
 }
 
-export default LogIn
+export default SignUp
