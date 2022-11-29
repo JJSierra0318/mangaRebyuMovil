@@ -43,7 +43,7 @@ const initialValues = {
 }
 
 //export for testing
-export const LogInContainer = ({ onSubmit, onInvalidData }) => {
+const LogInContainer = ({ onSubmit, onInvalidData }) => {
 
     return (
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>

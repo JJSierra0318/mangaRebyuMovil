@@ -1,11 +1,6 @@
-import { TextInput, View, StyleSheet, Text, Pressable, Alert } from "react-native"
+import { TextInput, View, StyleSheet, Text, Pressable } from "react-native"
 import * as yup from "yup"
 import { Formik } from "formik"
-import UserContext from "../contexts/userStorageContext"
-import { useNavigate } from "react-router-native"
-import { useContext } from "react"
-import axios from "axios"
-import * as Device from "expo-device"
 
 const formStyle = StyleSheet.create({
     input: {
@@ -42,6 +37,7 @@ const validationSchema = yup.object().shape({
         .required("Password is required"),
     confirmPassword: yup.string()
         .required("Confirm Password is required")
+        .oneOf([yup.ref("password"), null], "Password must match")
 })
 
 const initialValues = {
@@ -50,47 +46,7 @@ const initialValues = {
     confirmPassword: ""
 }
 
-const SignUp = () => {
-
-    const [user, setUser] = useContext(UserContext)
-    const navigate = useNavigate()
-
-    const signUp = async (userName, password) => {
-
-        const url = Device.osName == "Windows" ? "http://localhost:5142/api/crearRegistro" : "https://bccc-2800-e2-8880-1c2f-955c-1201-b28b-4c1b.ngrok.io/api/crearRegistro"
-         const body = {
-            userName,
-            password
-        }
-
-        const { data } = await axios.post(url, body)
-        return data.result
-    }
-
-    const onSubmit = async ({ username, password, confirmPassword }) => {
-        if (password === confirmPassword) {
-            const confirmSignUp = await signUp(username, password)
-            if (confirmSignUp === true) {
-                setUser(username)
-                navigate(`/`, { replace: true })
-            }
-            else onInvalidData("Username already taken")
-        }
-        else onInvalidData("Passwords do not match")
-    }
-
-    const onInvalidData = (message) =>
-        Alert.alert(
-            "Invalid Inputs",
-            message,
-            [
-                {
-                    text: "Ok",
-                    style: "cancel"
-                }
-            ]
-        )
-
+const SignUpContainer = ({ onSubmit, onInvalidData }) => {
     return (
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
             {({ handleSubmit, handleChange, handleBlur, values, isValid }) => (
@@ -102,6 +58,7 @@ const SignUp = () => {
                         name="username"
                         value={values.username}
                         onBlur={handleBlur('username')}
+                        testID="usernameField"
                     />
                     <Text style={formStyle.placeholder}>Password</Text>
                     <TextInput
@@ -111,6 +68,7 @@ const SignUp = () => {
                         secureTextEntry={true}
                         value={values.password}
                         onBlur={handleBlur('password')}
+                        testID="passwordField"
                     />
                     <Text style={formStyle.placeholder}>Confirm Password</Text>
                     <TextInput
@@ -120,8 +78,9 @@ const SignUp = () => {
                         secureTextEntry={true}
                         value={values.confirmPassword}
                         onBlur={handleBlur('confirmPassword')}
+                        testID="confirmPasswordField"
                     />
-                    <Pressable style={formStyle.button} onPress={isValid ? handleSubmit : () => onInvalidData("Both username and password are required")} title="log in">
+                    <Pressable style={formStyle.button} onPress={isValid ? handleSubmit : () => onInvalidData("All fields are required and passwords must match")} testID="signUpButton">
                         <Text>Log in</Text>
                     </Pressable>
                 </View>
@@ -130,4 +89,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default SignUpContainer

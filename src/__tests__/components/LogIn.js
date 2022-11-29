@@ -21,5 +21,31 @@ describe("Login", () => {
                 })
             })
         })
+        it("does not call onSubmit function when an invalid username is submitted", async () => {
+            const onSubmit = jest.fn()
+
+            const { getByTestId } = render(<LogInContainer onSubmit={onSubmit} />)
+
+            fireEvent.changeText(getByTestId("usernameField"), "")
+            fireEvent.changeText(getByTestId("passwordField"), "password")
+            fireEvent.press(getByTestId("logInButton"))
+
+            await waitFor(() => {
+                expect(onSubmit).toHaveBeenCalledTimes(0)
+            })
+        })
+        it("does not call onSubmit function when an invalid password is submitted", async () => {
+            const onSubmit = jest.fn()
+
+            const { getByTestId } = render(<LogInContainer onSubmit={onSubmit} />)
+
+            fireEvent.changeText(getByTestId("usernameField"), "Sierra")
+            fireEvent.changeText(getByTestId("passwordField"), "")
+            fireEvent.press(getByTestId("logInButton"))
+
+            await waitFor(() => {
+                expect(onSubmit).toHaveBeenCalledTimes(0)
+            })
+        })
     })
 })

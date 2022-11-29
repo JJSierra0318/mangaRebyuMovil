@@ -5,7 +5,7 @@ import AppBar from "./components/AppBar";
 import LogIn from "./components/Login/LogIn";
 import MangaList from './components/MangaList'
 import SingleManga from "./components/SingleManga";
-import SignUp from "./components/SignUp"
+import SignUp from "./components/Signup/SignUp"
 import UserContext from "./contexts/userStorageContext";
 
 const styles = StyleSheet.create({
