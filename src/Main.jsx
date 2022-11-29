@@ -1,6 +1,6 @@
-import { createContext, useState } from "react";
+import { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native"
-import { Route, Routes } from "react-router-native"
+import { Route, Routes, useNavigate, useParams } from "react-router-native"
 import AppBar from "./components/AppBar";
 import LogIn from "./components/LogIn";
 import MangaList from './components/MangaList'
@@ -18,6 +18,17 @@ const styles = StyleSheet.create({
     },
 });
 
+const RefreshPage = () => {
+
+    const navigate = useNavigate()
+    const id = useParams().id
+
+    useEffect(() => {
+        console.log("Success");
+        navigate(`/manga/${id}`, {replace: true})
+    }, [])
+}
+
 const Main = () => {
 
     const [user, setUser] = useState("")
@@ -31,6 +42,7 @@ const Main = () => {
                     <Route path="/manga/:id" element={<SingleManga />} />
                     <Route path="/login" element={<LogIn />} />
                     <Route path="/signup" element={<SignUp /> } />
+                    <Route path="/refresh/:id" element={<RefreshPage /> } />
                 </Routes>
             </UserContext.Provider>
         </View>

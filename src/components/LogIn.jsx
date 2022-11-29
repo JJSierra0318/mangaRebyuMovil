@@ -57,7 +57,7 @@ const LogIn = () => {
         const { data } = await axios({
             method: "get",
             //Si se conecta un dispositivo móvil se conecta por medio de un tunel con ngrok (ngrok 5142)
-            url: Device.osName == "Windows" ? "http://localhost:5142/api/consultarIngreso" : "https://cb2b-2800-e2-8880-1c2f-4986-788b-ee72-cec5.ngrok.io/api/consultarIngreso",
+            url: Device.osName == "Windows" ? "http://localhost:5142/api/consultarIngreso" : "https://7923-2800-e2-8880-1c2f-1572-df45-c023-f4b.ngrok.io/api/consultarIngreso",
             params: {
                 userName,
                 password
@@ -67,8 +67,8 @@ const LogIn = () => {
     }
 
     const onSubmit = async ({ username, password }) => {
-        const a = await logIn(username, password)
-        if (a === true) {
+        const confirmLogIn = await logIn(username, password)
+        if (confirmLogIn === true) {
             setUser(username)
             navigate(`/`, { replace: true })
         }

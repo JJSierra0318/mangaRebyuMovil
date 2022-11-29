@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native"
 import { useParams } from "react-router-native"
+import MangaReview from "./MangaReview"
 
 const mangaStyle = StyleSheet.create({
     container: {
@@ -117,6 +118,7 @@ const SingleManga = () => {
                     <Text style={{ color: "#A9ABB8" }}> / {categories.map(category => category.attributes.name + " / ")}</Text>
                 </Text>
             </View>
+            <MangaReview id={id}/>
         </ScrollView>
     )
 }

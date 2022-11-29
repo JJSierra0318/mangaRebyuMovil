@@ -69,12 +69,12 @@ const SignUp = () => {
 
     const onSubmit = async ({ username, password, confirmPassword }) => {
         if (password === confirmPassword) {
-            const a = await signUp(username, password)
-            if (a === true) {
+            const confirmSignUp = await signUp(username, password)
+            if (confirmSignUp === true) {
                 setUser(username)
                 navigate(`/`, { replace: true })
             }
-            else onInvalidData("Incorrect username or password")
+            else onInvalidData("Username already taken")
         }
         else onInvalidData("Passwords do not match")
     }
