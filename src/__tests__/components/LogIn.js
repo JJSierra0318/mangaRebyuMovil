@@ -4,6 +4,7 @@ import LogInContainer from "../../components/Login/LogInContainer"
 describe("Login", () => {
     describe("LoginContainer", () => {
         it("calls onSubmit function with correct arguments when a valid form is submitted", async () => {
+            
             const onSubmit = jest.fn()
 
             const { getByTestId } = render(<LogInContainer onSubmit={onSubmit} />)
@@ -22,6 +23,7 @@ describe("Login", () => {
             })
         })
         it("does not call onSubmit function when an invalid username is submitted", async () => {
+
             const onSubmit = jest.fn()
 
             const { getByTestId } = render(<LogInContainer onSubmit={onSubmit} />)
@@ -34,7 +36,9 @@ describe("Login", () => {
                 expect(onSubmit).toHaveBeenCalledTimes(0)
             })
         })
+
         it("does not call onSubmit function when an invalid password is submitted", async () => {
+
             const onSubmit = jest.fn()
 
             const { getByTestId } = render(<LogInContainer onSubmit={onSubmit} />)

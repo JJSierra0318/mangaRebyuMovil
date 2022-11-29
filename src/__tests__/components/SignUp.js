@@ -1,9 +1,10 @@
 import { render, fireEvent, waitFor } from "@testing-library/react-native"
 import SignUpContainer from "../../components/Signup/SignUpContainer"
 
-describe("SignUo", () => {
+describe("SignUp", () => {
     describe("SignUpContainer", () => {
         it("calls onSubmit function with correct arguments when a valid form is submitted", async () => {
+
             const onSubmit = jest.fn()
 
             const { getByTestId } = render(<SignUpContainer onSubmit={onSubmit}/>)
@@ -24,6 +25,7 @@ describe("SignUo", () => {
             })
         })
         it("does not call onSubmit function when an invalid username is submitted", async () => {
+
             const onSubmit = jest.fn()
 
             const { getByTestId } = render(<SignUpContainer onSubmit={onSubmit}/>)
@@ -38,6 +40,7 @@ describe("SignUo", () => {
             })
         })
         it("does no call onSubmit function when an invalid password is submitted", async () => {
+
             const onSubmit = jest.fn()
 
             const { getByTestId } = render(<SignUpContainer onSubmit={onSubmit}/>)
@@ -52,6 +55,7 @@ describe("SignUo", () => {
             })
         })
         it("does no call onSubmit function when password and confirmPassword do not match", async () => {
+            
             const onSubmit = jest.fn()
 
             const { getByTestId } = render(<SignUpContainer onSubmit={onSubmit}/>)
