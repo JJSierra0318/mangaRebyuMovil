@@ -34,7 +34,6 @@ const MangaListHeader = ({ filterBy, setFilterBy }) => {
 const MangaList = () => {
 
     const navigate = useNavigate()
-
     const [mangas, setMangas] = useState([])
     const [filterBy, setFilterBy] = useState("")
     const [page, setPage] = useState(10)

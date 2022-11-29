@@ -1,11 +1,6 @@
-import { useContext } from "react"
-import axios from "axios"
-import * as Device from "expo-device"
-import { TextInput, View, StyleSheet, Text, Pressable, Alert } from "react-native"
+import { TextInput, View, StyleSheet, Text, Pressable } from "react-native"
 import * as yup from "yup"
 import { Formik } from "formik"
-import UserContext from "../contexts/userStorageContext"
-import { useNavigate } from "react-router-native"
 
 const formStyle = StyleSheet.create({
     input: {
@@ -47,45 +42,8 @@ const initialValues = {
     password: ""
 }
 
-const LogIn = () => {
-
-    const [user, setUser] = useContext(UserContext)
-    const navigate = useNavigate()
-
-    const logIn = async (userName, password) => {
-
-        const { data } = await axios({
-            method: "get",
-            //Si se conecta un dispositivo móvil se conecta por medio de un tunel con ngrok (ngrok 5142)
-            url: Device.osName == "Windows" ? "http://localhost:5142/api/consultarIngreso" : "https://bccc-2800-e2-8880-1c2f-955c-1201-b28b-4c1b.ngrok.io/api/consultarIngreso",
-            params: {
-                userName,
-                password
-            }
-        })
-        return data.result
-    }
-
-    const onSubmit = async ({ username, password }) => {
-        const confirmLogIn = await logIn(username, password)
-        if (confirmLogIn === true) {
-            setUser(username)
-            navigate(`/`, { replace: true })
-        }
-        else onInvalidData("Incorrect username or password")
-    }
-
-    const onInvalidData = (message) =>
-        Alert.alert(
-            "Invalid Inputs",
-            message,
-            [
-                {
-                    text: "Ok",
-                    style: "cancel"
-                }
-            ]
-        )
+//export for testing
+export const LogInContainer = ({ onSubmit, onInvalidData }) => {
 
     return (
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
@@ -98,6 +56,7 @@ const LogIn = () => {
                         name="username"
                         value={values.username}
                         onBlur={handleBlur('username')}
+                        testID="usernameField"
                     />
                     <Text style={formStyle.placeholder}>Password</Text>
                     <TextInput
@@ -107,8 +66,9 @@ const LogIn = () => {
                         secureTextEntry={true}
                         value={values.password}
                         onBlur={handleBlur('password')}
+                        testID="passwordField"
                     />
-                    <Pressable style={formStyle.button} onPress={isValid ? handleSubmit : () => onInvalidData("Both username and password are required")} title="log in">
+                    <Pressable style={formStyle.button} onPress={isValid ? handleSubmit : () => onInvalidData("Both username and password are required")} testID="logInButton">
                         <Text>Log in</Text>
                     </Pressable>
                 </View>
@@ -117,4 +77,4 @@ const LogIn = () => {
     )
 }
 
-export default LogIn
+export default LogInContainer

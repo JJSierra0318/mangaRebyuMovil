@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native"
 import { Route, Routes, useNavigate, useParams } from "react-router-native"
 import AppBar from "./components/AppBar";
-import LogIn from "./components/LogIn";
+import LogIn from "./components/Login/LogIn";
 import MangaList from './components/MangaList'
 import SingleManga from "./components/SingleManga";
 import SignUp from "./components/SignUp"
