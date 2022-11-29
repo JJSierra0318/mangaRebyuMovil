@@ -57,7 +57,7 @@ const SignUp = () => {
 
     const signUp = async (userName, password) => {
 
-        const url = Device.osName == "Windows" ? "http://localhost:5142/api/crearRegistro" : "https://cb2b-2800-e2-8880-1c2f-4986-788b-ee72-cec5.ngrok.io/api/crearRegistro"
+        const url = Device.osName == "Windows" ? "http://localhost:5142/api/crearRegistro" : "https://bccc-2800-e2-8880-1c2f-955c-1201-b28b-4c1b.ngrok.io/api/crearRegistro"
          const body = {
             userName,
             password

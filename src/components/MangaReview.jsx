@@ -4,6 +4,7 @@ import axios from "axios"
 import * as Device from "expo-device"
 import ReviewForm from "./ReviewForm"
 import UserContext from "../contexts/userStorageContext"
+import SingleReview from "./SingleReview"
 
 const reviewStyle = StyleSheet.create({
     container: {
@@ -53,26 +54,23 @@ const MangaReview = ({ id }) => {
         const { data } = await axios({
             method: "get",
             //Si se conecta un dispositivo móvil se conecta por medio de un tunel con ngrok (ngrok 5142)
-            url: Device.osName == "Windows" ? "http://localhost:5142/api/sendDataMovil" : "https://7923-2800-e2-8880-1c2f-1572-df45-c023-f4b.ngrok.io/api/sendDataMovil",
+            url: Device.osName == "Windows" ? "http://localhost:5142/api/sendDataMovil" : "https://bccc-2800-e2-8880-1c2f-955c-1201-b28b-4c1b.ngrok.io/api/sendDataMovil",
             params: {
                 idManga
             }
         })
-        setReviews(data)
+        setReviews(data.data)
     }
 
     useEffect(() => {
         getReviews(id)
     }, [])
 
-    console.log(reviews);
-    
-
     return (
         <View style={reviewStyle.container}>
             <Text style={reviewStyle.title}>Reviews</Text>
             {reviews
-                ? null
+                ? reviews.map(review => <SingleReview review={review} key={review[0]}/>)
                 : <><Text style={reviewStyle.disclaimer}>There are no reviews for this manga yet</Text><Text style={reviewStyle.disclaimer}>be the first!</Text></>}
             {user
                 ? <View style={reviewStyle.review}>

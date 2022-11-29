@@ -48,7 +48,7 @@ const initialValues = {
 const ReviewForm = ({ id }) => {
 
     const [rating, setRating] = useState(5)
-    const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5])
+    const maxRating = [1, 2, 3, 4, 5]
     const [user] = useContext(UserContext)
     const navigate = useNavigate()
 
@@ -56,7 +56,7 @@ const ReviewForm = ({ id }) => {
     const emptyStar = "https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png"
 
     const postReview = async (user, id, rating, comment) => {
-        const url = Device.osName == "Windows" ? "http://localhost:5142/api/createRegisterMovil" : "https://7923-2800-e2-8880-1c2f-1572-df45-c023-f4b.ngrok.io/api/createRegisterMovil"
+        const url = Device.osName == "Windows" ? "http://localhost:5142/api/createRegisterMovil" : "https://bccc-2800-e2-8880-1c2f-955c-1201-b28b-4c1b.ngrok.io/api/createRegisterMovil"
         const body = {
             username: user,
             idManga: id,

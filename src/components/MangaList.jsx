@@ -55,7 +55,7 @@ const MangaList = () => {
     }*/
 
     const getMangas = async (q) => {
-        const url = filterBy ? `https://kitsu.io/api/edge/manga?filter[text]=${q}` : `https://kitsu.io/api/edge/trending/manga`
+        const url = filterBy && filterBy.trim() != "" ? `https://kitsu.io/api/edge/manga?filter[text]=${q}` : `https://kitsu.io/api/edge/trending/manga`
         const {data} = await axios({
             method: 'GET',
             url,
