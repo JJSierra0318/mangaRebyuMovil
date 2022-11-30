@@ -1,8 +1,4 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native"
-import { useParams } from "react-router-native"
-import MangaReview from "./MangaReview"
+import { Image, StyleSheet, Text, View } from "react-native"
 
 const mangaStyle = StyleSheet.create({
     container: {
@@ -50,49 +46,15 @@ const statusStyle = StyleSheet.create({
     }
 })
 
-const SingleManga = () => {
+const SingleMangaContainer = ({ manga, categories, id }) => {
 
-    const [manga, setManga] = useState([])
-    const [categories, setCategories] = useState([])
-    const id = useParams().id
-
-    const getManga = async (id) => {
-        const { data } = await axios({
-            method: 'GET',
-            url: `https://kitsu.io/api/edge/manga/${id}`,
-            headers: {
-                "Accept": "application/vnd.api+json",
-                "Content-Type": "application/vnd.api+json"
-            }
-        })
-        setManga(data.data)
-    }
-
-    const getCategories = async (id) => {
-        const { data } = await axios({
-            method: 'GET',
-            url: `https://kitsu.io/api/edge/manga/${id}/genres`,
-            headers: {
-                "Accept": "application/vnd.api+json",
-                "Content-Type": "application/vnd.api+json"
-            }
-        })
-        setCategories(data.data)
-    }
-
-    useEffect(() => {
-        getManga(id)
-        getCategories(id)
-    }, [])
-
-    if (!manga.attributes) return <Text>Loading</Text>
     const status = manga.attributes.status
     const rating = manga.attributes.averageRating
     const ageRating = manga.attributes.ageRating
 
     return (
-        <ScrollView>
-            <View style={mangaStyle.container}>
+        <>
+            <View style={mangaStyle.container} testID="singleMangaItem">
                 <Image
                     style={mangaStyle.image}
                     source={{ uri: manga.attributes.posterImage.original }}
@@ -118,9 +80,8 @@ const SingleManga = () => {
                     <Text style={{ color: "#A9ABB8" }}> / {categories.map(category => category.attributes.name + " / ")}</Text>
                 </Text>
             </View>
-            <MangaReview id={id}/>
-        </ScrollView>
+        </>
     )
 }
 
-export default SingleManga
+export default SingleMangaContainer

@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate, useParams } from "react-router-native"
 import AppBar from "./components/AppBar";
 import LogIn from "./components/Login/LogIn";
 import MangaList from './components/MangaList/MangaList'
-import SingleManga from "./components/SingleManga";
+import SingleManga from "./components/SingleManga/SingleManga";
 import SignUp from "./components/Signup/SignUp"
 import UserContext from "./contexts/userStorageContext";
 
