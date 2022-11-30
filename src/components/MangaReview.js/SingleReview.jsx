@@ -53,7 +53,7 @@ const SingleReview = ({ review }) => {
 
     return (
         <View>
-            <View style={reviewStyle.user}>
+            <View style={reviewStyle.user} testID="singleReviewContainer">
                 <Image style={reviewStyle.userIcon} source={{ uri: "https://cdn-icons-png.flaticon.com/128/2102/2102633.png" }} />
                 <Text style={reviewStyle.username}>{review[1]}</Text>
             </View>

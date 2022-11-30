@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { ScrollView, Text } from "react-native"
 import { useParams } from "react-router-native"
 import SingleMangaContainer from "./SingleMangaContainer"
-import MangaReview from "../MangaReview"
+import MangaReview from "../MangaReview.js/MangaReview"
 
 const SingleManga = () => {
 
