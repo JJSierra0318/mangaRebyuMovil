@@ -1,4 +1,4 @@
-import { render, fireEvent, waitFor } from "@testing-library/react-native"
+import { render } from "@testing-library/react-native"
 import SingleMangaContainer from "../../components/SingleManga/SingleMangaContainer"
 
 describe("SingleManga", () => {

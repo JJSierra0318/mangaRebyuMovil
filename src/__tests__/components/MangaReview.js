@@ -1,4 +1,4 @@
-import { render, waitFor, screen } from "@testing-library/react-native"
+import { render } from "@testing-library/react-native"
 import MangaReviewContainer from "../../components/MangaReview.js/MangaReviewContainer"
 
 describe("MangaReview", () => {

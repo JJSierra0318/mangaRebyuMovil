@@ -4,7 +4,7 @@ import * as Device from "expo-device"
 import UserContext from "../../contexts/userStorageContext"
 import MangaReviewContainer from "./MangaReviewContainer"
 import { StyleSheet, View } from "react-native"
-import ReviewForm from "../ReviewForm"
+import ReviewForm from "../ReviewForm/ReviewForm"
 
 const reviewStyle = StyleSheet.create({
     container: {
